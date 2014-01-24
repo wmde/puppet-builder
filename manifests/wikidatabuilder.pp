@@ -49,7 +49,7 @@ git::clone { 'wikidata':
     directory => '/home/wdbuilder/wikidata',
     # TODO use a different repo once deploying!
     # origin => 'ssh://USER@gerrit.wikimedia.org:29418/mediawiki/extensions/Wikidata.git',
-    origin => 'https://github.com/addshore/WikidataBuild.git',
+    origin => 'git@github.com:addshore/WikidataBuild.git',
     owner => 'wdbuilder',
     group => 'wdbuilder',
     require => User['wdbuilder'],
