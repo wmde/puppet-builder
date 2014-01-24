@@ -70,12 +70,12 @@ exec { 'npm_install':
     ],
 }
 
-file { '/home/wdbuilder/builder_cron.sh':
+file { '/home/wdbuilder/wikidatabuilder_cron.sh':
     ensure => file,
     mode => '0755',
     owner => 'wdbuilder',
     group => 'wdbuilder',
-    source => 'puppet:///modules/wikidata/builder_cron.sh',
+    source => 'puppet:///modules/wikidata/wikidatabuilder_cron.sh',
     require => [
         Exec['npm_install'],
         Git::Clone['wikidata']
@@ -86,11 +86,11 @@ file { '/home/wdbuilder/builder_cron.sh':
 # cron { 'builder_cron':
 #     ensure => present,
 #     # TODO commit the build to another repo
-#     command => '/home/wdbuilder/builder_cron.sh',
+#     command => '/home/wdbuilder/wikidatabuilder_cron.sh',
 #     user => 'wdbuilder',
 #     hour => '*/1',
 #     minute => [ 0, 30 ],
-#     require => [ File['/home/wdbuilder/builder_cron.sh'] ],
+#     require => [ File['/home/wdbuilder/wikidatabuilder_cron.sh'] ],
 # }
 
 }
