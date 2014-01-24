@@ -96,15 +96,13 @@ file { '/home/wdbuilder/cron.sh':
     ],
 }
 
-# TODO uncomment when ready
-# cron { 'builder_cron':
-#     ensure => present,
-#     # TODO commit the build to another repo
-#     command => '/home/wdbuilder/cron.sh > /var/log/buildercron.log 2>&1',
-#     user => 'wdbuilder',
-#     hour => '*/1',
-#     minute => [ 0, 30 ],
-#     require => [ File['/home/wdbuilder/cron.sh'] ],
-# }
+cron { 'builder_cron':
+     ensure => present,
+     command => '/home/wdbuilder/cron.sh > /var/log/buildercron.log 2>&1',
+     user => 'wdbuilder',
+     hour => '*',
+     minute => '*/5',
+     require => [ File['/home/wdbuilder/cron.sh'] ],
+}
 
 }
