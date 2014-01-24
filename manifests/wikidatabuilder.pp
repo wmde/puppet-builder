@@ -49,13 +49,13 @@ git::clone { 'wikidata':
     require => User['wdbuilder'],
 }
 
-git::userconfig{ 'gitconf for jenkins user':
+git::userconfig{ 'gitconf for wdbuilder user':
     homedir => '/home/wdbuilder',
     settings => {
-    'user' => {
-    'name' => 'WikidataBuilder',
-    'email' => 'wikidata@wikimedia.de',
-    },
+        'user' => {
+            'name' => 'WikidataBuilder',
+            'email' => 'wikidata@wikimedia.de',
+        },
     },
     require => User['wdbuilder'],
 }
@@ -65,8 +65,8 @@ exec { 'npm_install':
     cwd => '/home/wdbuilder/buildscript',
     command => '/usr/bin/npm install',
     require => [
-    Package['npm'],
-    Git::Clone['wikidatabuilder']
+        Package['npm'],
+        Git::Clone['wikidatabuilder']
     ],
 }
 
@@ -77,8 +77,8 @@ file { '/home/wdbuilder/builder_cron.sh':
     group => 'wdbuilder',
     source => 'puppet:///modules/wikidata/builder_cron.sh',
     require => [
-    Exec['npm_install'],
-    Git::Clone['wikidata']
+        Exec['npm_install'],
+        Git::Clone['wikidata']
     ],
 }
 
