@@ -49,7 +49,7 @@ git::clone { 'wikidatabuilder':
     origin => 'https://github.com/wmde/WikidataBuilder.git',
     owner => 'wdbuilder',
     group => 'wdbuilder',
-    require => File['/home/wdbuilder/cron.sh'],
+    require => File['/home/wdbuilder/.ssh/config'],
 }
 
 git::clone { 'wikidata':
