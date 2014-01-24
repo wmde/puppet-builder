@@ -46,7 +46,7 @@ git::clone { 'wikidata':
     origin => 'https://github.com/addshore/WikidataBuild.git',
     owner => 'wdbuilder',
     group => 'wdbuilder',
-    require => File['/home/wdbuilder'],
+    require => User['wdbuilder'],
 }
 
 git::userconfig{ 'gitconf for jenkins user':
@@ -57,7 +57,7 @@ git::userconfig{ 'gitconf for jenkins user':
     'email' => 'wikidata@wikimedia.de',
     },
     },
-    require => File['/home/wdbuilder'],
+    require => User['wdbuilder'],
 }
 
 exec { 'npm_install':
