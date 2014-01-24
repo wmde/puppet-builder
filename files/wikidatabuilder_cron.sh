@@ -3,6 +3,7 @@
 
 echo Rebuilding Wikidata Build
 cd /home/wdbuilder/buildscript
+git pull origin master
 grunt rebuild:Wikidata_master
 
 echo Pulling current Wikidata Repo
