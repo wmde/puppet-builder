@@ -81,7 +81,7 @@ file { '/home/wdbuilder/wikidatabuilder_cron.sh':
     mode => '0755',
     owner => 'wdbuilder',
     group => 'wdbuilder',
-    source => 'puppet:///modules/wikidata/wikidatabuilder_cron.sh',
+    source => 'puppet:///modules/wmde/wikidatabuilder_cron.sh',
     require => [
         Exec['npm_install'],
         Git::Clone['wikidata']
