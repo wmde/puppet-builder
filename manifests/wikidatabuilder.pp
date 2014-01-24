@@ -100,8 +100,8 @@ cron { 'builder_cron':
      ensure => present,
      command => '/home/wdbuilder/cron.sh > /var/log/buildercron.log 2>&1',
      user => 'wdbuilder',
-     hour => '*',
-     minute => '*/5',
+     hour => '0',
+     minute => '0',
      require => [ File['/home/wdbuilder/cron.sh'] ],
 }
 
