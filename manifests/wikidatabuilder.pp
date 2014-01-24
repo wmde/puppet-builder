@@ -35,7 +35,7 @@ git::clone { 'wikidatabuilder':
     origin => 'https://github.com/wmde/WikidataBuilder.git',
     owner => 'wdbuilder',
     group => 'wdbuilder',
-    require => File['/home/wdbuilder'],
+    require => User['wdbuilder'],
 }
 
 git::clone { 'wikidata':
