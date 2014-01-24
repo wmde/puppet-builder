@@ -14,7 +14,7 @@ package { [
 
 exec { 'npm_registry_http':
     user => 'root',
-    command => 'npm config set registry="http://registry.npmjs.org/"',
+    command => '/usr/bin/npm config set registry="http://registry.npmjs.org/"',
     require => Package['nodejs', 'npm'],
 }
 
