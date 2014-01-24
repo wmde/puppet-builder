@@ -4,12 +4,14 @@
 echo --1-- Rebuilding Wikidata Build
 
 cd /home/wdbuilder/buildscript
+git checkout master
 git pull origin master
 grunt rebuild:Wikidata_master
 
 echo --2-- Pulling current Wikidata Repo
 
 cd /home/wdbuilder/wikidata
+git checkout master
 git pull origin master
 
 echo --3-- Copying the new Wikidata build to the Repo
