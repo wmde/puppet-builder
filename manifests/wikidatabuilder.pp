@@ -12,10 +12,16 @@ package { [
     ensure => 'present',
 }
 
+exec { 'npm_registry_http':
+    user => 'root',
+    command => 'npm config set registry="http://registry.npmjs.org/"',
+    require => Package['nodejs', 'npm'],
+}
+
 exec { 'grunt-cli_install':
     user => 'root',
     command => '/usr/bin/npm install -g grunt-cli',
-    require => Package['nodejs', 'npm'],
+    require => Exec['npm_registry_http'],
 }
 
 group { 'wdbuilder':
