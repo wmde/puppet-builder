@@ -1,6 +1,6 @@
-# == Class: wikidata::builder
+# == Class: wmde::wikidatabuilder
 
-class wikidata::builder {
+class wmde::wikidatabuilder {
 
 package { [
 'nodejs',
