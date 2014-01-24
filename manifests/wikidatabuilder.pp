@@ -92,7 +92,7 @@ file { '/home/wdbuilder/wikidatabuilder_cron.sh':
 # cron { 'builder_cron':
 #     ensure => present,
 #     # TODO commit the build to another repo
-#     command => '/home/wdbuilder/wikidatabuilder_cron.sh',
+#     command => '/home/wdbuilder/wikidatabuilder_cron.sh > /var/log/buildercron.log 2>&1',
 #     user => 'wdbuilder',
 #     hour => '*/1',
 #     minute => [ 0, 30 ],
