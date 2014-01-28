@@ -47,7 +47,6 @@ git::clone { 'wikidatabuilder':
     ensure => 'latest',
     directory => '/home/wdbuilder/buildscript',
     origin => 'https://github.com/wmde/WikidataBuilder.git',
-    branch => 'addshorePatch',
     owner => 'wdbuilder',
     group => 'wdbuilder',
     require => File['/home/wdbuilder/.ssh/config'],
