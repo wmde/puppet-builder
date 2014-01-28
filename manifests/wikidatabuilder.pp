@@ -47,6 +47,7 @@ git::clone { 'wikidatabuilder':
     ensure => 'latest',
     directory => '/home/wdbuilder/buildscript',
     origin => 'https://github.com/wmde/WikidataBuilder.git',
+    branch => 'addshorePatch',
     owner => 'wdbuilder',
     group => 'wdbuilder',
     require => File['/home/wdbuilder/.ssh/config'],
@@ -100,8 +101,8 @@ cron { 'builder_cron':
      ensure => present,
      command => '/home/wdbuilder/cron.sh > /var/log/buildercron.log 2>&1',
      user => 'wdbuilder',
-     hour => '0',
-     minute => '0',
+     hour => '*',
+     minute => '*/5',
      require => [ File['/home/wdbuilder/cron.sh'] ],
 }
 
