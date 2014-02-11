@@ -40,7 +40,7 @@ file { '/home/wdbuilder/.ssh/config':
     mode => '0755',
     owner => 'wdbuilder',
     group => 'wdbuilder',
-    source => 'puppet:///modules/wmde/builder/ssh/config',
+    source => 'puppet:///modules/wdbuilder/builder/ssh/config',
 }
 
 file { '/home/wdbuilder/wikidata/.git/hooks/commit-msg':
@@ -48,7 +48,7 @@ file { '/home/wdbuilder/wikidata/.git/hooks/commit-msg':
     mode => '0755',
     owner => 'wdbuilder',
     group => 'wdbuilder',
-    source => 'puppet:///modules/wmde/builder/wikidata/git/hooks/commit-msg',
+    source => 'puppet:///modules/wdbuilder/builder/wikidata/git/hooks/commit-msg',
 }
 
 git::clone { 'wikidatabuilder':
@@ -96,7 +96,7 @@ file { '/home/wdbuilder/cron.sh':
     mode => '0755',
     owner => 'wdbuilder',
     group => 'wdbuilder',
-    source => 'puppet:///modules/wmde/builder/cron.sh',
+    source => 'puppet:///modules/wdbuilder/builder/cron.sh',
     require => [
     Exec['npm_install'],
     Git::Clone['wikidata']
