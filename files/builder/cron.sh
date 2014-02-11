@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #
 
+now="$(date +'%d/%m/%Y %H-%M')"
+
 echo --1-- Rebuilding Wikidata Build
 
 cd /home/wdbuilder/buildscript
@@ -36,7 +38,7 @@ if [ "${build_exit_value}" -eq "0" ] ; then
 
 	cd /home/wdbuilder/wikidata
 	git add *
-	git commit -m 'New Wikidata Build'
+	git commit -m "New Wikidata Build - $now"
 	git push origin HEAD:refs/publish/master
 	git reset --hard origin/master
 
