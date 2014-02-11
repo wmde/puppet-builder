@@ -5,34 +5,43 @@ echo --1-- Rebuilding Wikidata Build
 
 cd /home/wdbuilder/buildscript
 git checkout master
-git pull origin master
 git reset --hard origin/master
+git pull origin master
 rm -rf /home/wdbuilder/buildscript/build/*
 grunt rebuild:Wikidata_master
+build_exit_value=$?
 
-echo --2-- Pulling current Wikidata Repo
+if [ "${build_exit_value}" -eq "0" ] ; then
 
-cd /home/wdbuilder/wikidata
-git checkout master
-git pull origin master
-git reset --hard origin/master
+	echo --2-- Pulling current Wikidata Repo
 
-echo --3-- Copying the new Wikidata build to the Repo
+	cd /home/wdbuilder/wikidata
+	git checkout master
+	git pull origin master
+	git reset --hard origin/master
 
-cd /home/wdbuilder
-mkdir /home/wdbuilder/wikidata-tmp
-mkdir /home/wdbuilder/wikidata-tmp/.git
-cp -r /home/wdbuilder/wikidata/.git/* /home/wdbuilder/wikidata-tmp/.git
-cd /home/wdbuilder/wikidata-tmp
-git rm -rf *
-cp -r /home/wdbuilder/buildscript/build/Wikidata_master/Wikidata/* /home/wdbuilder/wikidata-tmp
-rm -rf /home/wdbuilder/wikidata
-mv /home/wdbuilder/wikidata-tmp /home/wdbuilder/wikidata
+	echo --3-- Copying the new Wikidata build to the Repo
 
-echo --4-- Committing new Wikidata build
+	cd /home/wdbuilder
+	mkdir /home/wdbuilder/wikidata-tmp
+	mkdir /home/wdbuilder/wikidata-tmp/.git
+	cp -r /home/wdbuilder/wikidata/.git/* /home/wdbuilder/wikidata-tmp/.git
+	cd /home/wdbuilder/wikidata-tmp
+	git rm -rf *
+	cp -r /home/wdbuilder/buildscript/build/Wikidata_master/Wikidata/* /home/wdbuilder/wikidata-tmp
+	rm -rf /home/wdbuilder/wikidata
+	mv /home/wdbuilder/wikidata-tmp /home/wdbuilder/wikidata
 
-cd /home/wdbuilder/wikidata
-git add *
-git commit -m 'New Wikidata Build'
-git push origin HEAD:refs/publish/master
-git reset --hard origin/master
+	echo --4-- Committing new Wikidata build
+
+	cd /home/wdbuilder/wikidata
+	git add *
+	git commit -m 'New Wikidata Build'
+	git push origin HEAD:refs/publish/master
+	git reset --hard origin/master
+
+else
+
+	echo "Build exited with a bad error code...."
+
+fi
