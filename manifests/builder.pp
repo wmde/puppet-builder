@@ -1,6 +1,6 @@
-# == Class: wmde::wikidatabuilder
+# == Class: wdbuilder::builder
 
-class wmde::wikidatabuilder {
+class wdbuilder::builder {
 
 package { [
 'nodejs',
@@ -40,7 +40,15 @@ file { '/home/wdbuilder/.ssh/config':
     mode => '0755',
     owner => 'wdbuilder',
     group => 'wdbuilder',
-    source => 'puppet:///modules/wmde/wikidatabuilder/ssh/config',
+    source => 'puppet:///modules/wmde/builder/ssh/config',
+}
+
+file { '/home/wdbuilder/wikidata/.git/hooks/commit-msg':
+    ensure => file,
+    mode => '0755',
+    owner => 'wdbuilder',
+    group => 'wdbuilder',
+    source => 'puppet:///modules/wmde/builder/wikidata/git/hooks/commit-msg',
 }
 
 git::clone { 'wikidatabuilder':
@@ -55,9 +63,8 @@ git::clone { 'wikidatabuilder':
 git::clone { 'wikidata':
     ensure => 'latest',
     directory => '/home/wdbuilder/wikidata',
-    # TODO use a different repo once deploying!
-    # origin => 'ssh://USER@gerrit.wikimedia.org:29418/mediawiki/extensions/Wikidata.git',
-    origin => 'git@github.com:addshore/WikidataBuild.git',
+    origin => 'ssh://wikidatabuilder@gerrit.wikimedia.org:29418/mediawiki/extensions/Wikidata',
+    # origin => 'git@github.com:addshore/WikidataBuild.git',
     owner => 'wdbuilder',
     group => 'wdbuilder',
     require => User['wdbuilder'],
@@ -66,10 +73,10 @@ git::clone { 'wikidata':
 git::userconfig{ 'gitconf for wdbuilder user':
     homedir => '/home/wdbuilder',
     settings => {
-        'user' => {
-            'name' => 'WikidataBuilder',
-            'email' => 'wikidata@wikimedia.de',
-        },
+    'user' => {
+    'name' => 'WikidataBuilder',
+    'email' => 'wikidata-services@wikimedia.de',
+    },
     },
     require => User['wdbuilder'],
 }
@@ -79,8 +86,8 @@ exec { 'npm_install':
     cwd => '/home/wdbuilder/buildscript',
     command => '/usr/bin/npm install',
     require => [
-        Package['npm'],
-        Git::Clone['wikidatabuilder']
+    Package['npm'],
+    Git::Clone['wikidatabuilder']
     ],
 }
 
@@ -89,20 +96,20 @@ file { '/home/wdbuilder/cron.sh':
     mode => '0755',
     owner => 'wdbuilder',
     group => 'wdbuilder',
-    source => 'puppet:///modules/wmde/wikidatabuilder/cron.sh',
+    source => 'puppet:///modules/wmde/builder/cron.sh',
     require => [
-        Exec['npm_install'],
-        Git::Clone['wikidata']
+    Exec['npm_install'],
+    Git::Clone['wikidata']
     ],
 }
 
 cron { 'builder_cron':
-     ensure => present,
-     command => '/home/wdbuilder/cron.sh > /var/log/buildercron.log 2>&1',
-     user => 'wdbuilder',
-     hour => '*',
-     minute => '*/5',
-     require => [ File['/home/wdbuilder/cron.sh'] ],
+    ensure => present,
+    command => '/home/wdbuilder/cron.sh > /var/log/buildercron.log 2>&1',
+    user => 'wdbuilder',
+    hour => '10',
+    minute => '0',
+    require => [ File['/home/wdbuilder/cron.sh'], File['/home/wdbuilder/wikidata/.git/hooks/commit-msg'] ],
 }
 
 }

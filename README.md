@@ -1,4 +1,4 @@
-puppet
+puppet-builder
 ======
 
-Public puppet repository for the wmde team.
+Public puppet repository for the wdbuilder for the wmde team.
