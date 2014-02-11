@@ -112,4 +112,11 @@ cron { 'builder_cron':
     require => [ File['/home/wdbuilder/cron.sh'], File['/home/wdbuilder/wikidata/.git/hooks/commit-msg'] ],
 }
 
+cron { 'puppet_module':
+    ensure => present,
+    command => 'cd /etc/puppet/modules/wdbuilder && git pull origin master > /var/log/wdbuilder_puppet_pull.log 2>&1',
+    user => 'root',
+    minute => '*/30',
+}
+
 }
