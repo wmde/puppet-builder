@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Get the date at the start of the script for use in the commit msg
-now="$(date +'%d/%m/%Y %H-%M')"
+now="$(date +'%d/%m/%Y %H:%M')"
 
 echo --1-- Rebuilding Wikidata Build
 
