@@ -32,6 +32,8 @@ Troubleshooting
 Currently this is not part of puppet and thus if this is a problem you will need to add the fingerprints!
 The easiest way to do this is just to clone a repo from gerrit / github and when it asks "Are you sure you want to continue connecting (yes/no)" pick Yes!
 
+* Sometimes the composer install will fail with a timeout exception. This is likely due to the github api limit being reached. See https://github.com/wmde/WikidataBuilder/issues/14 and https://github.com/wmde/WikidataBuilder/issues/15 which would make this exception nicer and allow us to pass in a READONLY Oauth token for the github API (A seperate dunny github account should be created for the builder to use).
+
 TODO
 -----------
 
