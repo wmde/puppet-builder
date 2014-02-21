@@ -10,6 +10,7 @@ cd /home/wdbuilder/buildscript
 git checkout master
 git reset --hard origin/master
 git pull origin master
+git reset --hard origin/master
 # Forcefully remove all of the old build
 rm -rf /home/wdbuilder/buildscript/build/*
 # Rebuild Wikidata
