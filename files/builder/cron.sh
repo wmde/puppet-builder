@@ -25,6 +25,7 @@ if [ "${build_exit_value}" -eq "0" ] ; then
 	# If we dont do this our .git will be wrong and things get messy
 	cd /home/wdbuilder/wikidata
 	git checkout master
+	git reset --hard origin/master
 	git pull origin master
 	git reset --hard origin/master
 
