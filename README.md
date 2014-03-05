@@ -62,8 +62,8 @@ Installation
 10. Run Puppet (this time it should work)
 > puppetd -tv
 
-11. Run the bash script and see if it all works!
-> /home/wdbuilder/cron.sh
+11. Run the bash script as wdbuilder and see if it all works!
+> /data/wdbuilder/cron.sh
 
 Troubleshooting
 -----------
