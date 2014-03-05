@@ -43,6 +43,15 @@ file { '/data/wdbuilder/.ssh':
     require => User['wdbuilder'],
 }
 
+file { '/data/wdbuilder/.ssh/known_hosts':
+    ensure => file,
+    mode => '0755',
+    owner => 'wdbuilder',
+    group => 'wdbuilder',
+    source => 'puppet:///modules/wdbuilder/builder/ssh/known_hosts',
+    require => File['/data/wdbuilder/.ssh'],
+}
+
 file { '/data/wdbuilder/.ssh/config':
     ensure => file,
     mode => '0755',
