@@ -37,6 +37,9 @@ user { 'wdbuilder':
 
 file { '/home/wdbuilder/.ssh':
     ensure => "directory",
+    owner => 'wdbuilder',
+    group => 'wdbuilder',
+    require => User['wdbuilder'],
 }
 
 file { '/home/wdbuilder/.ssh/config':
