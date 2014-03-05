@@ -80,7 +80,6 @@ TODO
 -----------
 
 * If the build fails then retry
-* Puppetize the adding of the fingerprints of github and gerrit
 
 ## Authors
 
