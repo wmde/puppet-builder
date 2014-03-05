@@ -35,12 +35,17 @@ user { 'wdbuilder':
     managehome => true,
 }
 
+file { '/home/wdbuilder/.ssh':
+    ensure => "directory",
+}
+
 file { '/home/wdbuilder/.ssh/config':
     ensure => file,
     mode => '0755',
     owner => 'wdbuilder',
     group => 'wdbuilder',
     source => 'puppet:///modules/wdbuilder/builder/ssh/config',
+    require => File['/home/wdbuilder/.ssh'],
 }
 
 file { '/home/wdbuilder/wikidata/.git/hooks/commit-msg':
