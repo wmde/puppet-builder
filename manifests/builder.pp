@@ -75,7 +75,7 @@ git::clone { 'wikidatabuilder':
     origin => 'https://github.com/wmde/WikidataBuilder.git',
     owner => 'wdbuilder',
     group => 'wdbuilder',
-    require => File['/data/wdbuilder/.ssh/config'],
+    require => [ File['/data/wdbuilder/.ssh/config'], File['/data/wdbuilder/.ssh/known_hosts'] ],
 }
 
 git::clone { 'wikidata':
@@ -85,7 +85,7 @@ git::clone { 'wikidata':
     # origin => 'git@github.com:addshore/WikidataBuild.git',
     owner => 'wdbuilder',
     group => 'wdbuilder',
-    require => User['wdbuilder'],
+    require => File['/data/wdbuilder/.ssh/known_hosts'],
 }
 
 git::userconfig{ 'gitconf for wdbuilder user':
