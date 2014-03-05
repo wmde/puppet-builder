@@ -9,7 +9,7 @@ This module installs all dependencies, clones a few repos and sets up a cron!
 
 ####Generating a build
 
-* The build is triggered by a [cronjob](https://github.com/addshore/puppet/blob/master/files/wikidatabuilder/cron.sh) on the [wikidata-builder1](https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-build) instance at 10:00 AM (UTC) each day.
+* The build is triggered by a [cronjob](https://github.com/addshore/puppet/blob/master/files/wikidatabuilder/cron.sh) on the a [wikidata-builderN](https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-build) instance at 10:00 AM (UTC) each day.
 * The build script from https://github.com/wmde/WikidataBuilder is used to generate the build.
 * The build is then pushed to a new commit in the [Wikidata repository](https://gerrit.wikimedia.org/r/#/admin/projects/mediawiki/extensions/Wikidata) on Gerrit.
 
@@ -37,20 +37,32 @@ Installation
 -----------
 
 1. Create an instance on labs, call it something like "wikidata-builderN".
+
 2. Run Puppet
 > puppetd -tv
-6. On wikitech > Manage Instances > Instance > Configure > enable "role::puppet::self".
+
+3. On wikitech > Manage Instances > Instance > Configure > enable "role::puppet::self".
+
 4. Run Puppet
 > puppetd -tv
-5. Clone this repo as a puppet module
+
+5. As root clone this repo as a puppet module
 > git clone https://github.com/wmde/puppet-builder.git /etc/puppet/modules/wdbuilder
+
 6. On wikitech > Manage Puppet Groups > Project > Add class > "wdbuilder::builder".
-7. Run Puppet
+
+7. Run Puppet (expect a failure when cloning the gerrit repo)
 > puppetd -tv
+
 8. Make a public / private key for the wdbuidler user
 > ssh-keygen -t rsa
+
 9. Copy the public key to gerrit from /home/wdbuilder/.ssh for the WikidataBuilder user
-10. Run the bash script and see if it all works!
+
+10. Run Puppet (this time it should work)
+> puppetd -tv
+
+11. Run the bash script and see if it all works!
 > /home/wdbuilder/cron.sh
 
 Troubleshooting
