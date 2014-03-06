@@ -123,7 +123,7 @@ file { '/data/wdbuilder/cron.sh':
 
 cron { 'builder_cron':
     ensure => present,
-    command => '/data/wdbuilder/cron.sh > /var/log/buildercron.log 2>&1',
+    command => '/data/wdbuilder/cron.sh > /data/wdbuilder/cron.log 2>&1',
     user => 'wdbuilder',
     hour => '10',
     minute => '0',
