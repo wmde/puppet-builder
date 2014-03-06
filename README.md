@@ -49,20 +49,22 @@ Installation
 5. As root clone this repo as a puppet module
 > git clone https://github.com/wmde/puppet-builder.git /etc/puppet/modules/wdbuilder
 
-6. On wikitech > Manage Puppet Groups > Project > Add class > "wdbuilder::builder".
+6. On wikitech (If not already done) > Manage Puppet Groups > Project > Add class > "wdbuilder::builder".
 
-7. Run Puppet (expect a failure when cloning the gerrit repo)
+7. On wikitech > Manage Instances > Configure Instance > Tick the wdbuilder::builder class
+
+8. Run Puppet (expect a failure when cloning the gerrit repo)
 > puppetd -tv
 
-8. Make a public / private key for the wdbuidler user
+9. Make a public / private key for the wdbuidler user
 > ssh-keygen -t rsa
 
-9. Copy the public key to gerrit from /home/wdbuilder/.ssh for the WikidataBuilder user
+10. Copy the public key to gerrit from /home/wdbuilder/.ssh for the WikidataBuilder user
 
-10. Run Puppet (this time it should work)
+11. Run Puppet (this time it should work)
 > puppetd -tv
 
-11. Run the bash script as wdbuilder and see if it all works!
+12. Run the bash script as wdbuilder and see if it all works!
 > /data/wdbuilder/cron.sh
 
 Troubleshooting
