@@ -39,12 +39,12 @@ Installation
 1. Create an instance on labs, call it something like "wikidata-builderN".
 
 2. Run Puppet
-> puppetd -tv
+> puppet agent -tv
 
 3. On wikitech > Manage Instances > Instance > Configure > enable "role::puppet::self".
 
 4. Run Puppet
-> puppetd -tv
+> puppet agent -tv
 
 5. As root clone this repo as a puppet module
 > git clone https://github.com/wmde/puppet-builder.git /etc/puppet/modules/wdbuilder
@@ -54,7 +54,7 @@ Installation
 7. On wikitech > Manage Instances > Configure Instance > Tick the wdbuilder::builder class
 
 8. Run Puppet (expect a failure when cloning the gerrit repo)
-> puppetd -tv
+> puppet agent -tv
 
 9. Make a public / private key for the wdbuidler user
 > ssh-keygen -t rsa
@@ -62,7 +62,7 @@ Installation
 10. Copy the public key to gerrit from /home/wdbuilder/.ssh for the WikidataBuilder user
 
 11. Run Puppet (this time it should work)
-> puppetd -tv
+> puppet agent -tv
 
 12. Run the bash script as wdbuilder and see if it all works!
 > /data/wdbuilder/cron.sh
